@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 import TaskPopUp from "./taskForm";
+import DeletingList from "./deletingList";
 
 const Header = () => {
 
@@ -12,6 +13,16 @@ const Header = () => {
     };
 
     const closeModal = () => {
+        setIsOpen(false);
+    };
+
+    const [deleteClick, setDeleteClick] = useState(false);
+
+    const deleteTrue = () => {
+        setDeleteClick(true);
+    };
+
+    const deleteFalse = () => {
         setIsOpen(false);
     };
 
@@ -32,7 +43,8 @@ const Header = () => {
 
                         <button
                             className="block rounded-lg bg-[#ffffff] px-5 py-3 text-sm font-medium text-black transition hover:bg-black hover:text-white focus:outline-none focus:ring"
-                            type="button">
+                            type="button"
+                            onClick={deleteTrue}>
                             Delete Task
                         </button>
 
@@ -44,6 +56,8 @@ const Header = () => {
                         </button>
 
                         {isOpen && <TaskPopUp state={isOpen} closedModal={closeModal} />}
+
+                        {deleteClick && <DeletingList />}
 
                     </div>
                     
