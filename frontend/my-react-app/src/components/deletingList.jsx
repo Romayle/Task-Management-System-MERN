@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 const DeletingList = ( {state, closeList} ) => {
-    const [visibility, setVisibility] = useState(true);
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
@@ -25,11 +24,13 @@ const DeletingList = ( {state, closeList} ) => {
     const handleDeleteTasks = () => {
         tasks.map(task => {
             if (task.selected === true) {
-                fetch('/api/tasks/:id', {
+                fetch('/api/tasks/'+ task._id, {
                     method: 'DELETE'
                 })
             }
         })
+
+        closeList()
     };
 
     return (
