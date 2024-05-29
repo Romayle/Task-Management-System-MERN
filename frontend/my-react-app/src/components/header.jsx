@@ -3,28 +3,29 @@ import { useState } from "react";
 
 import TaskPopUp from "./taskForm";
 import DeletingList from "./deletingList";
+import TaskForm from "./taskForm";
 
 const Header = () => {
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [taskPopUp, setTaskPopUp] = useState(false);
+    const [deletePopUp, setDeletePopUp] = useState(false);
 
-    const openModal = () => {
-        setIsOpen(true);
-    };
+    const setTaskPopUpTrue = () => {
+        setTaskPopUp(true);
+    }
 
-    const closeModal = () => {
-        setIsOpen(false);
-    };
+    const setTaskPopUpFlase = () => {
+        setTaskPopUp(false);
+    }
 
-    const [deleteClick, setDeleteClick] = useState(false);
+    const setDeletePopUpTrue = () => {
+        setDeletePopUp(true);
+    }
 
-    const deleteTrue = () => {
-        setDeleteClick(true);
-    };
+    const setDeletePopUpFlase = () => {
+        setDeletePopUp(false);
+    }
 
-    const deleteFalse = () => {
-        setIsOpen(false);
-    };
 
     return (
         <header className="bg-[#ebf0f6]">
@@ -42,22 +43,22 @@ const Header = () => {
                     <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
 
                         <button
-                            className="block rounded-lg bg-[#ffffff] px-5 py-3 text-sm font-medium text-black transition hover:bg-black hover:text-white focus:outline-none focus:ring"
-                            type="button"
-                            onClick={deleteTrue}>
-                            Delete Task
-                        </button>
-
-                        <button
                             className="block rounded-lg bg-[#7783ee] px-5 py-3 text-sm font-medium text-white transition hover:bg-black focus:outline-none focus:ring"
                             type="button"
-                            onClick={setIsOpen}>
+                            onClick={setTaskPopUpTrue}>
                             Add Task
                         </button>
 
-                        {isOpen && <TaskPopUp state={isOpen} closedModal={closeModal} />}
+                        <button
+                            className="block rounded-lg bg-[#ffffff] px-5 py-3 text-sm font-medium text-black transition hover:bg-black hover:text-white focus:outline-none focus:ring"
+                            type="button"
+                            onClick={setDeletePopUpTrue}>
+                            Delete Task
+                        </button>
 
-                        {deleteClick && <DeletingList />}
+                        {taskPopUp && <TaskForm state={taskPopUp} closeForm={setTaskPopUpFlase} />}
+
+                        {deletePopUp && <DeletingList state={deletePopUp} closeList={setDeletePopUpFlase} />}
 
                     </div>
                     

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-const DeletingList = () => {
+const DeletingList = ( {state, closeList} ) => {
+    const [visibility, setVisibility] = useState(true);
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
@@ -21,9 +22,22 @@ const DeletingList = () => {
         }));
     };
 
+    const handleDeleteTasks = () => {
+        tasks.map(task => {
+            if (task.selected === true) {
+                fetch('/api/tasks/:id', {
+                    method: 'DELETE'
+                })
+            }
+        })
+    };
+
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white rounded-lg shadow-lg mx-4 max-w-lg p-6">
+        <>
+        {state && (<div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+
+            <div className="bg-white rounded-lg shadow-lg mx-4 max-w-lg p-6 h-4/5 overflow-y-auto">
+                
                 <fieldset className="space-y-4">
                     <legend className="sr-only">Delivery</legend>
                     {tasks.map(task => (
@@ -48,10 +62,31 @@ const DeletingList = () => {
                         </div>
                     ))}
                 </fieldset>
+
+                <div className='flex flex-row gap-2'>
+                    <button
+                        type="button"
+                        className="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
+                        onClick={handleDeleteTasks}
+                    >
+                        Delete Tasks
+                    </button>
+
+                    <button
+                        type="button"
+                        className="block w-full rounded-lg bg-black px-5 py-3 text-sm font-medium text-white"
+                        onClick={closeList}
+                    >
+                        Cancel
+                    </button>
+                </div>
+
             </div>
+
         </div>
+        )}
+        </>
     );
 };
 
 export default DeletingList;
-

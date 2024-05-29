@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 
-const TaskPopUp = ( {state, closedModal} ) => {
+const TaskForm = ( {state, closeForm} ) => {
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
@@ -34,7 +34,7 @@ const TaskPopUp = ( {state, closedModal} ) => {
             console.log('new task added', json)
         }
 
-        closedModal()
+        closeForm()
     }
 
     return (
@@ -124,7 +124,7 @@ const TaskPopUp = ( {state, closedModal} ) => {
                                 <button
                                     type="submit"
                                     className="block w-full rounded-lg bg-black px-5 py-3 text-sm font-medium text-white"
-                                    onClick={closedModal}
+                                    onClick={closeForm}
                                 >
                                     Cancel
                                 </button>
@@ -142,4 +142,4 @@ const TaskPopUp = ( {state, closedModal} ) => {
     );
 };
 
-export default TaskPopUp;
+export default TaskForm;
