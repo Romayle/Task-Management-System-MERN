@@ -1,8 +1,9 @@
+import { useTaskContext } from '../hooks/useTaskContext';
 import React from 'react';
 import { useState } from 'react';
 
 const TaskForm = ( {state, closeForm} ) => {
-
+    const { dispatch } = useTaskContext()
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [importance, setImportance] = useState(false)
@@ -32,6 +33,7 @@ const TaskForm = ( {state, closeForm} ) => {
             setImportance(false)
             setError(null)
             console.log('new task added', json)
+            dispatch({type: 'CREATE_TASK', payload: json})
         }
 
         closeForm()

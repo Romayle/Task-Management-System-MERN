@@ -1,6 +1,8 @@
+import { useTaskContext } from '../hooks/useTaskContext';
 import React, { useState, useEffect } from 'react';
 
 const DeletingList = ( {state, closeList} ) => {
+    const { dispatch } = useTaskContext()
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
@@ -26,11 +28,13 @@ const DeletingList = ( {state, closeList} ) => {
             if (task.selected === true) {
                 fetch('/api/tasks/'+ task._id, {
                     method: 'DELETE'
-                })
+                }).then(() => {
+                    dispatch({ type: 'DELETE_TASK', payload: task._id });
+                }).catch(error => console.error('Error deleting task:', error));
             }
         })
 
-        closeList()
+        closeList();
     };
 
     return (

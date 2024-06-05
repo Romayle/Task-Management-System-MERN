@@ -4,11 +4,14 @@ import './index.css';
 import './tailwind.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { TaskContextProvider } from './context/taskContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <TaskContextProvider>
+      <App />
+    </TaskContextProvider>
   </React.StrictMode>
 );
 

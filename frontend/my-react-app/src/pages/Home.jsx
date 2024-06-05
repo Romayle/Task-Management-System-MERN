@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useTaskContext } from '../hooks/useTaskContext';
 
 import SideMenu from '../components/sideMenu';
 import SearchBar from '../components/searchBar';
@@ -6,9 +7,9 @@ import Header from '../components/header';
 import TaskCard from '../components/taskCard';
 
 const Home = () => {
-    
-    const [tasks, setTasks] = useState(null)
 
+    const {tasks, dispatch} = useTaskContext()
+    
     useEffect(() => {
         const fetchTasks = async () => {
             const res = await fetch('api/tasks')
@@ -17,7 +18,7 @@ const Home = () => {
             console.log("json:", json);
 
             if (res.ok) {
-                setTasks(json)
+                dispatch({type: 'SET_TASKS', payload:json})
             }
         }
 
