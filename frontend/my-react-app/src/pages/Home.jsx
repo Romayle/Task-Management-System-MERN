@@ -30,7 +30,7 @@ const Home = () => {
             <div className="flex-col flex-grow bg-[#ebf0f6] p-3">
                 <SearchBar />
                 <Header />
-                <div className="grid grid-cols-4 gap-4 p-4 lg:grid-cols-5">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 lg:grid-cols-5 overflow-y-auto h-3/4 flex-wrap">
                     {tasks && tasks.map((task) => (
                         <TaskCard key={task._id} task={task} />
                     ))}                    
